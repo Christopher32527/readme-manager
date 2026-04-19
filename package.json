@@ -3,9 +3,9 @@
   "displayName": "README Manager",
   "description": "Centralized README file management and navigation for VSCode",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "Christopher32527",
   "author": {
-    "name": "Your Name"
+    "name": "Christopher"
   },
   "engines": {
     "vscode": "^1.75.0"
