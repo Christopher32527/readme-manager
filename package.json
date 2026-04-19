@@ -1,0 +1,145 @@
+{
+  "name": "readme-manager",
+  "displayName": "README Manager",
+  "description": "Centralized README file management and navigation for VSCode",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "author": {
+    "name": "Your Name"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "readme",
+    "documentation",
+    "navigation",
+    "markdown",
+    "file-manager"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/src/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "readmeManager.treeView",
+          "name": "README Files",
+          "icon": "resources/icon.svg",
+          "contextualTitle": "README Manager"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "readmeManager.openFile",
+        "title": "README Manager: Open File"
+      },
+      {
+        "command": "readmeManager.quickOpen",
+        "title": "README Manager: Quick Open",
+        "icon": "$(search)"
+      },
+      {
+        "command": "readmeManager.preview",
+        "title": "README Manager: Preview",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "readmeManager.refresh",
+        "title": "README Manager: Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "readmeManager.refresh",
+          "when": "view == readmeManager.treeView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "readmeManager.preview",
+          "when": "view == readmeManager.treeView && viewItem == readmeFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "readmeManager.quickOpen",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r"
+      }
+    ],
+    "configuration": {
+      "title": "README Manager",
+      "properties": {
+        "readmeManager.filePatterns": {
+          "type": "array",
+          "default": [],
+          "description": "Additional README file name patterns (regex)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readmeManager.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.vscode/**"
+          ],
+          "description": "Glob patterns to exclude from scanning",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "test:coverage": "c8 npm test",
+    "test:report": "c8 report --reporter=html",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/node": "18.x",
+    "@types/mocha": "^10.0.0",
+    "@types/glob": "^8.1.0",
+    "@vscode/test-electron": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.40.0",
+    "glob": "^10.3.0",
+    "typescript": "^5.0.0",
+    "mocha": "^10.2.0",
+    "c8": "^8.0.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/readme-manager"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/readme-manager/issues"
+  },
+  "license": "MIT"
+}
